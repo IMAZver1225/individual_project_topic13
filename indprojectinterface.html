@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Переводчик</title>
+</head>
+<style>
+    body {
+    background-color: black;
+    color: white;
+    text-align: center;
+    font-family: Arial
+    padding-top: 50px;
+    }
+
+input  {
+    padding: 10px;
+    font-size; 16px;
+    border-radius; 5px;
+    border 1px solid #ccc;
+    width: 250px;
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #077bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor:pointer;
+    }
+
+#output {
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #28a745;
+    }
+</style>
+
+<body>
+<H1>ПЕРЕВОДЧИК</H1>
+<h2>Введите ваше имя:</h2>
+
+<input type="text" id="userInput" placeholder="Напишите что-нибудь...">
+<button onclick="checkInput()">Отправить</button>
+<div id="output"></div>
+<script>
+    function checkInput() {
+        let text = document.getElementById("userInput").value;
+
+        let outputBlock = document.getElementById("output");
+
+        if (text.trim() === "") {
+            outputBlock.innerText = "Вы ничего не ввели.";
+            outputBlock.style.color = "red";
+        } else {
+            outputBlock.innerText = "Привет, " + text + "!"
+            outputBlock.style.color = #28a745";
+        }
+    }
+</script>
+
+</body>
+</html>
