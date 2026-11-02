@@ -1,50 +1,38 @@
+from flask import Flask, render_template, request
 from googletrans import Translator
 
-class TranslationSession:
+app = Flask(__name__)
+
+class WebTranslationSession:
     def __init__(self):
         self.translator = Translator()
-        self.original_text = ""
-        self.target_language = ""
 
-    def get_text_request(self):
-        self.original_text = input("Введите текст, который хотите перевести: ")
+        def translate(self, original_text, target_language):
+            try:
+                result = self.translator.translate(original_text, dest=target_language)
+                return result.text
+            except Exception as err:
+                return f"/Произошла ошибка при переводе: {str(err)}"
 
-    def target_language_request(self):
-        self.target_language = input("Введите код языка, на который сделать перевод(en,ru,es): ")
+translator_instance = WebTranslationSession()
 
-    def translate(self):
-        try:
-            result = self.translator.translate(self.original_text, dest=self.target_language)
+@app.route("/", methods=["GET", "POST"])
+def index():
+    translated_text = ""
+    user_text = ""
+    lang = "en"
 
-            print("--- Результат перевода ---")
-            print(f"Исходный язык: {result.src.upper()}")
-            print(f"Перевод: {result.text}")
-            print("-" * 26)
+    if request.method == "POST":
+        user_text = request.form.get("text", "")
+        lang = request.form.get("lang", "en")
 
-        except Exception as err:
-            print(f"Произошла ошибка при переводе. Убедитесь, что вы ввели корректные данные.")
-            print(f"Техническая информация: {err}")
+        if user_text.strip():
+            translated_text = translator_instance.translate(user_text, lang)
 
-    def run(self):
-        print("Добро пожаловать в программу для перевода.")
-        print("Для окончания сессии в любой момент введите: end_session")
+    return render_template("indprojectinterface.html",
+                           translated_text=translated_text,
+                           user_text=user_text,
+                           lang=lang)
 
-        while True:
-            self.get_text_request()
-            if self.original_text == "end_session":
-                print("Сессия завершена.")
-                break
-
-            if not self.original_text:
-                print("Вы ничего не ввели. Попробуйте снова.")
-
-            self.target_language_request()
-            if self.target_language == "end_session":
-                print("Сессия завершена.")
-                break
-
-            self.translate()
-
-session = TranslationSession()
-
-session.run()
+if __name__ == '__main__':
+    app.run()
