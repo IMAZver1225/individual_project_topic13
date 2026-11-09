@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Переводчик - Главная</title>
+</head>
+<style>
+    body {
+    background-color: black;
+    color: #10c400;
+    text-align: center;
+    font-family: Arial
+    padding-top: 50px;
+    }
+
+input  {
+    padding: 10px;
+    font-size; 16px;
+    border-radius; 5px;
+    border 1px solid #ccc;
+    width: 250px;
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #077bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor:pointer;
+    }
+
+output {
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #28a745;
+    }
+
+</style>
+
+<body>
+<H1>ПЕРЕВОДЧИК</H1>
+<h2>Оригинальный текст:</h2>
+
+<form action="/result" method="POST">
+
+    <textarea name="text" placeholder="Напишите что-нибудь...">{{ user_text }}</textarea>
+    <br>
+
+    <button type="submit">ПЕРЕВЕСТИ</button>
+
+</form>
+
+</body>
+</html>
