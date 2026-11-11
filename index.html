@@ -13,7 +13,7 @@
     padding-top: 50px;
     }
 
-input  {
+input {
     padding: 10px;
     font-size; 16px;
     border-radius; 5px;
@@ -47,6 +47,14 @@ output {
 
     <textarea name="text" placeholder="Напишите что-нибудь...">{{ user_text }}</textarea>
     <br>
+    <label for="language-select">Выберите язык перевода:</label>
+
+    <select name="languages" id="language-select">
+        <option value="en">ENG</option>
+        <option value="ru">RUS</option>
+        <option value="de">DEU</option>
+        <option value="es">ESP</option>
+    </select>
 
     <button type="submit">ПЕРЕВЕСТИ</button>
 
