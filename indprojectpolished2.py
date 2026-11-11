@@ -7,9 +7,12 @@ class WebTranslationSession:
     def __init__(self):
         self.translator = Translator()
 
-    def translate(self, original_text, target_language):
+    def translate(self,
+                  original_text,
+                  target_language):
         try:
-            result = self.translator.translate(original_text, dest=target_language)
+            result = self.translator.translate(original_text,
+                                               dest=target_language)
             return result.text
         except Exception as err:
             return f"/Произошла ошибка при переводе: {str(err)}"
@@ -20,14 +23,16 @@ translator_instance = WebTranslationSession()
 def index():
     return render_template("index.html")
 
-@app.route("/result", methods=["POST"])
+@app.route("/result",methods=["POST"])
 def result():
-    user_text = request.form.get("text", "")
+    user_text = request.form.get("text")
+    target_language = request.form.get("languages")
 
     translated_text = ""
     if user_text:
-        translated_text = translator_instance.translate(user_text, target_language="en")
-        print (translated_text)
+        translated_text = translator_instance.translate(user_text,
+                                                        target_language)
+
     return render_template("result.html",
                            original=user_text,
                            translated=translated_text)
